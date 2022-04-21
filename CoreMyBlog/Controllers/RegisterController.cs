@@ -37,7 +37,6 @@ namespace CoreMyBlog.Controllers
 
             if (ModelState.IsValid && writer.WriterPassword == passwordAgain && writerMailCheck == null)
             {
-                writer.WriterAbout = "Deneme Test";
                 writer.WriterStatus = true;
                 wm.WriterAdd(writer);
                 return RedirectToAction("Index", "Blog");
