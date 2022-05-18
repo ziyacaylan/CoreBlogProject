@@ -46,7 +46,7 @@ namespace BusinessLayer.Concrete
 
         public void TAdd(Blog t)
         {
-            throw new NotImplementedException();
+            _blogDal.Insert(t);
         }
 
         public void TUpdate(Blog t)
@@ -62,6 +62,10 @@ namespace BusinessLayer.Concrete
         public List<Blog> GetListAll()
         {
             throw new NotImplementedException();
+        }
+        public List<Blog> GetListWithCategoryByWriterBlogManager (int id)
+        {
+            return _blogDal.GetListWithCategoryByWriter(id);
         }
     }
 }
