@@ -4,6 +4,11 @@
     ViewData["Title"] = "BlogListByWriter";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
+<!-- Sweetalert 2 Mesaj Kullanımı Gerekli importlar-->
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+<script src="~/CoreBlogTema/js/jquery-2.2.3.min.js"></script>
+
 
 <h1>Yazarın Blogları</h1>
 <table class="table table-bordered">
@@ -18,25 +23,42 @@
     </tr>
     @foreach (var item in Model)
     {
-<tr>
-    <th>@item.BlogID</th>
-    <td>@item.BlogTitle</td>
-    <td>@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyy"))</td>
-    <td>@item.Category.CategoryName</td>    
-    <td>
-        @if (item.BlogStatus)
-        {
-            <span class="badge badge-success">Aktif</span>
-        }
-        else
-        {
-            <span class="badge badge-secondary">Pasif</span>
-        }
-    </td>
-    <td><a href="#" class="btn btn-danger">Sil</a></td>
-    <td><a href="#" class="btn btn-warning">Güncelle</a></td>
-</tr>
+        <tr>
+            <th>@item.BlogID</th>
+            <td>@item.BlogTitle</td>
+            <td>@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyy"))</td>
+            <td>@item.Category.CategoryName</td>
+            <td>
+                @if (item.BlogStatus)
+                {
+                    <span class="badge badge-success">Aktif</span>
+                }
+                else
+                {
+                    <span class="badge badge-secondary">Pasif</span>
+                }
+            </td>
+            <td><a href="/Blog/DeleteBlog/@item.BlogID" class="btn btn-danger preview delete-confirm" id="btn_4">Sil</a></td>
+            <td><a href="#" class="btn btn-warning">Güncelle</a></td>
+        </tr>
     }
 </table>
 
 <a href="~/Blog/BlogAdd/" class="btn btn-primary">Yeni Blog Oluştur</a>
+
+<script>
+    $('.delete-confirm').on('click', function (event) {
+        event.preventDefault();
+        const url = $(this).attr('href');
+        swal({
+            title: 'Silmek istediğinize emin misiniz_?',
+            text: 'Bu kayıt veritabanından silinecek...!',
+            icon: 'warning',
+            buttons: ["Hayır", "Evet!"],
+        }).then(function (value) {
+            if (value) {
+                window.location.href = url;
+            }
+        });
+    });
+</script>
