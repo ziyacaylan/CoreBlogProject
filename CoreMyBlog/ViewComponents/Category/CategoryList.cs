@@ -14,7 +14,7 @@ namespace CoreMyBlog.ViewComponents.Category
 
         public IViewComponentResult Invoke()
         {
-            var values = cm.GetList();
+            var values = cm.GetListAll();
             return View(values);
         }
     }

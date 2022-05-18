@@ -13,7 +13,7 @@ namespace CoreMyBlog.Controllers
         AboutManager abm = new AboutManager(new EfAboutRepository());
         public IActionResult Index()
         {
-            var values = abm.GetList();
+            var values = abm.GetListAll();
             return View(values);
         }
         public PartialViewResult SocialMediaAbout()
